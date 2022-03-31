@@ -1,7 +1,14 @@
 import React from 'react'
+import { Footer, Navbar } from '../ui'
 
-export const Layout = () => {
+export const Layout = ({children}) => {
   return (
-    <div>Layout</div>
+    <div>
+      <Navbar></Navbar>
+      {children}
+      <Footer></Footer>
+    </div>
+
+
   )
 }
