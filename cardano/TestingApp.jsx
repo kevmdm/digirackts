@@ -1,17 +1,19 @@
 import React from "react";
 // import { start, bid, close } from "../../../cardano/plutus/contract"
-import {
-  Tab,
-  Tabs,
-  RadioGroup,
-  Radio,
-  FormGroup,
-  InputGroup,
-  NumericInput,
-} from "@blueprintjs/core";
-import "@blueprintjs/core/lib/css/blueprint.css";
-import "@blueprintjs/icons/lib/css/blueprint-icons.css";
-import "../../node_modules/normalize.css/normalize.css";
+// import {
+//   Tab,
+//   Tabs,
+//   RadioGroup,
+//   Radio,
+//   FormGroup,
+//   InputGroup,
+//   NumericInput,
+// } from "@blueprintjs/core";
+// import "@blueprintjs/core/lib/css/blueprint.css";
+// import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+// import "../../node_modules/normalize.css/normalize.css";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import Cardano from "./serialization-lib/index";
 import { contractAddress } from "./market-contract/validator";
 import { set_error } from "../store/error/errorActions";
@@ -49,7 +51,7 @@ import {
   listAsset,
   cancelListing,
 } from "./market-contract/index";
-import { blake2b } from "blakejs";
+// import { blake2b } from "blakejs";
 import { WALLET_STATE, MARKET_TYPE } from "../store/wallet/walletTypes";
 import {
   walletConnected,
@@ -60,7 +62,8 @@ import { getWalletAssets } from "../store/wallet/api";
 import { getAssets } from "../database/assets";
 import Contracts from "./market-contract/plutus";
 let Buffer = require("buffer/").Buffer;
-let blake = require("blakejs");
+import VerticalTabs from "./Tabs";
+// let blake = require("blakejs");
 
 export default class Dapp extends React.Component {
   constructor(props) {
@@ -114,8 +117,8 @@ export default class Dapp extends React.Component {
       validAssets: [],
       tokenSale: "",
       tokenForSale: "",
-      sellerAddress:undefined,
-      royaltiesAddress:undefined
+      sellerAddress: undefined,
+      royaltiesAddress: undefined
     };
 
     /**
@@ -609,13 +612,13 @@ export default class Dapp extends React.Component {
           const sellerAddressBytes = arrayToBytes(sellerAddressHex.sa32);
           //console.log(fromHex(sellerAddress));
           const sellerAddress = Cardano.Instance.Address.from_bytes(fromHex(sellerAddressBytes))
-          
+
           //console.log(sellerAddress.to_bech32());
           const royaltiesAddressHex = txmetadata["2"]["json_metadata"];
           const royaltiesAddressBytes = arrayToBytes(royaltiesAddressHex.ra32);
           //console.log(fromHex(sellerAddress));
           const royaltiesAddress = Cardano.Instance.Address.from_bytes(fromHex(royaltiesAddressBytes))
-          
+
           //console.log(royaltyAddress.to_bech32());
           const tokenForSale = saleDetails.tn;
           // console.log(saleDetails);
@@ -632,7 +635,7 @@ export default class Dapp extends React.Component {
             asset,
             assetPolicyIdHex: assetDetails["policyId"],
             assetNameHex: assetDetails["assetName"],
-            tokenForSale,royaltiesAddress,sellerAddress
+            tokenForSale, royaltiesAddress, sellerAddress
           });
         } catch (error) {
           console.error(error);
@@ -694,7 +697,12 @@ export default class Dapp extends React.Component {
     await Cardano.load();
     await this.refreshData();
   }
-
+  a11yProps(index) {
+    return {
+      id: `vertical-tab-${index}`,
+      'aria-controls': `vertical-tabpanel-${index}`,
+    };
+  }
   render() {
     return (
       <div className="bg-white" style={{ margin: "20px" }}>
@@ -767,319 +775,315 @@ export default class Dapp extends React.Component {
           {this.state.usedAddress}
         </p>
         <hr style={{ marginTop: "40px", marginBottom: "40px" }} />
+        {/* <VerticalTabs panels={[{ payload: (<div>hola</div>), index: 0, label: 'hola' }]}></VerticalTabs> */}
+        <VerticalTabs
+          panels=
+          {
+            [{ payload: (<div>hola</div>), label: "My assets", index: 0 },
+            {
+              label: "Cancel", index: 1,
+              payload: (
+                < div style={{ marginLeft: "20px" }}>
+                  <button
 
-        <Tabs
-          id="TabsExample"
-          vertical={true}
-          onChange={this.handleTabId}
-          selectedTabId={this.state.selectedTabId}
-        >
-          <Tab
-            id="1"
-            title="My assets"
-            panel={<div style={{ marginLeft: "20px" }}></div>}
-          />
-          <Tab
-            id="2"
-            title="Cancel sell"
-            panel={
-              <div style={{ marginLeft: "20px" }}>
-                <button
-                 
-                 className="gray1_button"
-                  onClick={async () => {
-                    const shelleyChangeAddress =
-                      Cardano.Instance.Address.from_bech32(
-                        this.state.changeAddress
-                      );
-                    const sellerBaseAddress =
-                      Cardano.Instance.BaseAddress.from_address(
-                        shelleyChangeAddress
-                      );
-                    const wallet = {
-                      data: { address: this.state.changeAddress },
-                    };
-                    const asset = {
-                      status: {
-                        datum: this.state.saleDetails,
-                        datumHash: this.state.datumHash,
-                        submittedBy: this.state.changeAddress,
-                        artistAddress: this.state.changeAddress,
-                      },
-                      details: { asset: this.state.asset },
-                    };
-
-                    try {
-                      await Wallet.getAvailableWallets();
-                      const walletUtxos = await Wallet.getUtxos();
-                      const contractVersion = "v3";
-
-                      const assetUtxo = (
-                        await getLockedUtxosByAsset(
-                          contractAddress(contractVersion).to_bech32(),
-                          asset.details.asset
-                        )
-                      ).find(
-                        (utxo) => utxo.data_hash === asset.status.datumHash
-                      );
-
-                      if (assetUtxo) {
-                        const txHash = await cancelListing(
-                          asset.status.datum,
-                          {
-                            address: fromBech32(wallet.data.address),
-                            utxos: walletUtxos,
-                          },
-                          createTxUnspentOutput(
-                            contractAddress(contractVersion),
-                            assetUtxo
-                          ),
-                          contractVersion
+                    className="gray1_button"
+                    onClick={async () => {
+                      const shelleyChangeAddress =
+                        Cardano.Instance.Address.from_bech32(
+                          this.state.changeAddress
                         );
-
-                        if (txHash) {
-                          console.log({
-                            success: true,
-                            type: MARKET_TYPE.DELIST,
-                          });
-                        } else {
-                          console.log({ success: false });
-                        }
-                      } else {
-                        console.log({ success: false });
-                      }
-                    } catch (error) {
-                      console.error(
-                        `Unexpected error in delistToken. [Message: ${error.message}]`
-                      );
-                      console.log({ success: false });
-                    }
-                  }}
-                >
-                  Cancel
-                </button>
-              </div>
-            }
-          />
-          <Tab
-            id="4"
-            title="Send (Sell) Token to Plutus Script"
-            panel={
-              <div style={{ marginLeft: "20px" }}>
-                <p style={{ paddingTop: "20px" }}>
-                  <span style={{ fontWeight: "bold" }}>Token: </span>
-                  {`${fromHex(this.state.tokenSale)}`}
-                </p>
-                <p>
-                  <span style={{ fontWeight: "bold" }}>Price: </span>
-                  {`${10000000}`}
-                </p>
-                <p>
-                  <span style={{ fontWeight: "bold" }}>Contract: </span>
-                  {`${Contracts["v3"].address}`}
-                </p>
-
-                <button
-                  style={{ padding: "10px" }}
-                  className="purple_button"
-                  onClick={async () => {
-                    const shelleyChangeAddress =
-                      Cardano.Instance.Address.from_bech32(
-                        this.state.changeAddress
-                      );
-                    const sellerBaseAddress =
-                      Cardano.Instance.BaseAddress.from_address(
-                        shelleyChangeAddress
-                      );
-                    const bench32 = sellerBaseAddress.to_address().to_bech32();
-                    console.log(bench32);
-                    const wallet = {
-                      data: { address: this.state.changeAddress },
-                    };
-
-                    const asset = this.state.validAssets[0];
-                    console.log(asset);
-
-                    try {
-                      await Wallet.getAvailableWallets();
-                      // const collectionDetails = await getCollection(asset.details.policyId);
-                      const walletUtxos = await Wallet.getUtxos();
-
-                      const royaltiesAddress = wallet.data.address;
-                      const royaltiesPercentage = 0;
-                      const price = 10;
-
-                      const datum = createDatum(
-                        asset.details.assetName,
-                        asset.details.policyId,
-                        wallet.data.address,
-                        royaltiesAddress,
-                        royaltiesPercentage,
-                        price
-                      );
-                      const datumsa32 = datum;
-                      datumsa32.sa32 = wallet.data.address;
-                      console.log(datumsa32);
-
-                      const contractVersion =
-                        process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
-
-                      const listObj = await listAsset(
-                        datum,
-                        {
-                          address: fromBech32(wallet.data.address),
-                          utxos: walletUtxos,
+                      const sellerBaseAddress =
+                        Cardano.Instance.BaseAddress.from_address(
+                          shelleyChangeAddress
+                        );
+                      const wallet = {
+                        data: { address: this.state.changeAddress },
+                      };
+                      const asset = {
+                        status: {
+                          datum: this.state.saleDetails,
+                          datumHash: this.state.datumHash,
+                          submittedBy: this.state.changeAddress,
+                          artistAddress: this.state.changeAddress,
                         },
-                        contractVersion,
-                        wallet.data.address,
-                        royaltiesAddress
-                      );
+                        details: { asset: this.state.asset },
+                      };
 
-                      if (listObj && listObj.datumHash && listObj.txHash) {
-                        console.log({
-                          success: true,
-                          type: MARKET_TYPE.NEW_LISTING,
-                        });
-                      } else {
-                        console.log({ success: false });
-                      }
-                    } catch (error) {
-                      console.error(
-                        `Unexpected error in listToken. [Message: ${error.message}]`
-                      );
-                      console.log({ success: false });
-                    }
-                  }}
-                >
-                  Sell
-                </button>
-              </div>
-            }
-          />
-          <Tab
-            id="6"
-            title="Redeem Tokens (buy) from Plutus Script"
-            panel={
-              <div style={{ marginLeft: "20px" }}>
-                <p style={{ paddingTop: "20px" }}>
-                  <span style={{ fontWeight: "bold" }}>Token: </span>
-                  {`${fromHex(this.state.tokenForSale)}`}
-                </p>
-                <p>
-                  <span style={{ fontWeight: "bold" }}>Price: </span>
-                  {`${10000000}`}
-                </p>
-                <p>
-                  <span style={{ fontWeight: "bold" }}>Contract: </span>
-                  {`${Contracts["v3"].address}`}
-                </p>
+                      try {
+                        await Wallet.getAvailableWallets();
+                        const walletUtxos = await Wallet.getUtxos();
+                        const contractVersion = "v3";
 
-                <button
-                 className="purple_button"
-                  style={{ padding: "10px" }}
-                  onClick={async () => {
-                    console.log("press");
-                    const shelleyChangeAddress =
-                      Cardano.Instance.Address.from_bech32(
-                        this.state.changeAddress
-                      );
-                    const buyerBaseAddress =
-                      Cardano.Instance.BaseAddress.from_address(
-                        shelleyChangeAddress
-                      );
-                    const sellerKeyhash =
-                      Cardano.Instance.Ed25519KeyHash.from_bytes(
-                        fromHex(this.state.saleDetails.sa)
-                      );
-                    
-                    const wallet = {
-                      data: { address: this.state.changeAddress },
-                    };
-                    const submittedBy=this.state.sellerAddress.to_bech32()
-                    const artistAddress=this.state.royaltiesAddress.to_bech32()
-                    const asset = {
-                      status: {
-                        datum: this.state.saleDetails,
-                        datumHash: this.state.datumHash,
-                        submittedBy:
-                          this.state.sellerAddress.to_bech32(),
-                        artistAddress:
-                          this.state.royaltiesAddress.to_bech32(),
-                      },
-                      details: { asset: this.state.asset },
-                    };
-
-                    try {
-                      // console.log(wallet);
-                      // console.log(asset);
-                      await Wallet.getAvailableWallets();
-                      const walletUtxos = await Wallet.getUtxos();
-                      const contractVersion = "v3"; //resolveContractVersion(asset);
-                      // console.log(walletUtxos);
-                      const assetUtxo = (
-                        await getLockedUtxosByAsset(
-                          contractAddress(contractVersion).to_bech32(),
-                          asset.details.asset
-                        )
-                      ).find(
-                        (utxo) => utxo.data_hash === asset.status.datumHash
-                      );
-                      // console.log(assetUtxo);
-                      if (assetUtxo) {
-                        const txHash = await purchaseAsset(
-                          asset.status.datum,
-                          {
-                            address: fromBech32(wallet.data.address),
-                            utxos: walletUtxos,
-                          },
-                          {
-                            seller: fromBech32(asset.status.submittedBy),
-                            artist: fromBech32(asset.status.artistAddress),
-                            market: fromBech32(
-                              process.env.REACT_APP_MARTIFY_ADDRESS
-                            ),
-                          },
-                          createTxUnspentOutput(
-                            contractAddress(contractVersion),
-                            assetUtxo
-                          ),
-                          contractVersion
+                        const assetUtxo = (
+                          await getLockedUtxosByAsset(
+                            contractAddress(contractVersion).to_bech32(),
+                            asset.details.asset
+                          )
+                        ).find(
+                          (utxo) => utxo.data_hash === asset.status.datumHash
                         );
 
-                        if (txHash) {
-                          const event = createEvent(
-                            MARKET_TYPE.PURCHASE,
+                        if (assetUtxo) {
+                          const txHash = await cancelListing(
                             asset.status.datum,
-                            txHash,
-                            wallet.data.address
+                            {
+                              address: fromBech32(wallet.data.address),
+                              utxos: walletUtxos,
+                            },
+                            createTxUnspentOutput(
+                              contractAddress(contractVersion),
+                              assetUtxo
+                            ),
+                            contractVersion
                           );
 
+                          if (txHash) {
+                            console.log({
+                              success: true,
+                              type: MARKET_TYPE.DELIST,
+                            });
+                          } else {
+                            console.log({ success: false });
+                          }
+                        } else {
+                          console.log({ success: false });
+                        }
+                      } catch (error) {
+                        console.error(
+                          `Unexpected error in delistToken. [Message: ${error.message}]`
+                        );
+                        console.log({ success: false });
+                      }
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+
+              )
+            }, {
+              label: "Sell", index: 2,
+              payload: (
+                < div style={{ marginLeft: "20px" }}>
+                  <p style={{ paddingTop: "20px" }}>
+                    <span style={{ fontWeight: "bold" }}>Token: </span>
+                    {`${fromHex(this.state.tokenSale)}`}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Price: </span>
+                    {`${10000000}`}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Contract: </span>
+                    {`${Contracts["v3"].address}`}
+                  </p>
+
+                  <button
+                    style={{ padding: "10px" }}
+                    className="purple_button"
+                    onClick={async () => {
+                      const shelleyChangeAddress =
+                        Cardano.Instance.Address.from_bech32(
+                          this.state.changeAddress
+                        );
+                      const sellerBaseAddress =
+                        Cardano.Instance.BaseAddress.from_address(
+                          shelleyChangeAddress
+                        );
+                      const bench32 = sellerBaseAddress.to_address().to_bech32();
+                      console.log(bench32);
+                      const wallet = {
+                        data: { address: this.state.changeAddress },
+                      };
+
+                      const asset = this.state.validAssets[0];
+                      console.log(asset);
+
+                      try {
+                        await Wallet.getAvailableWallets();
+                        // const collectionDetails = await getCollection(asset.details.policyId);
+                        const walletUtxos = await Wallet.getUtxos();
+
+                        const royaltiesAddress = wallet.data.address;
+                        const royaltiesPercentage = 0;
+                        const price = 10;
+
+                        const datum = createDatum(
+                          asset.details.assetName,
+                          asset.details.policyId,
+                          wallet.data.address,
+                          royaltiesAddress,
+                          royaltiesPercentage,
+                          price
+                        );
+                        const datumsa32 = datum;
+                        datumsa32.sa32 = wallet.data.address;
+                        console.log(datumsa32);
+
+                        const contractVersion =
+                          process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+
+                        const listObj = await listAsset(
+                          datum,
+                          {
+                            address: fromBech32(wallet.data.address),
+                            utxos: walletUtxos,
+                          },
+                          contractVersion,
+                          wallet.data.address,
+                          royaltiesAddress
+                        );
+
+                        if (listObj && listObj.datumHash && listObj.txHash) {
                           console.log({
                             success: true,
-                            type: MARKET_TYPE.PURCHASE,
-                            txHash,
+                            type: MARKET_TYPE.NEW_LISTING,
                           });
                         } else {
                           console.log({ success: false });
                         }
-                      } else {
+                      } catch (error) {
+                        console.error(
+                          `Unexpected error in listToken. [Message: ${error.message}]`
+                        );
                         console.log({ success: false });
                       }
-                    } catch (error) {
-                      console.error(
-                        `Unexpected error in purchaseToken. [Message: ${error.message}]`
-                      );
-                      console.log({ success: false });
-                    }
-                  }}
-                >
-                  Buy
-                </button>
-              </div>
-            }
-          />
-          <Tabs.Expander />
-        </Tabs>
+                    }}
+                  >
+                    Sell
+                  </button>
+                </div>
+              )
+            }, {
+              label: "Buy", index: 3,
+              payload: (
+                < div style={{ marginLeft: "20px" }
+                }>
+                  <p style={{ paddingTop: "20px" }}>
+                    <span style={{ fontWeight: "bold" }}>Token: </span>
+                    {`${fromHex(this.state.tokenForSale)}`}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Price: </span>
+                    {`${10000000}`}
+                  </p>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Contract: </span>
+                    {`${Contracts["v3"].address}`}
+                  </p>
+
+                  <button
+                    className="purple_button"
+                    style={{ padding: "10px" }}
+                    onClick={async () => {
+                      console.log("press");
+                      const shelleyChangeAddress =
+                        Cardano.Instance.Address.from_bech32(
+                          this.state.changeAddress
+                        );
+                      const buyerBaseAddress =
+                        Cardano.Instance.BaseAddress.from_address(
+                          shelleyChangeAddress
+                        );
+                      const sellerKeyhash =
+                        Cardano.Instance.Ed25519KeyHash.from_bytes(
+                          fromHex(this.state.saleDetails.sa)
+                        );
+
+                      const wallet = {
+                        data: { address: this.state.changeAddress },
+                      };
+                      const submittedBy = this.state.sellerAddress.to_bech32()
+                      const artistAddress = this.state.royaltiesAddress.to_bech32()
+                      const asset = {
+                        status: {
+                          datum: this.state.saleDetails,
+                          datumHash: this.state.datumHash,
+                          submittedBy:
+                            this.state.sellerAddress.to_bech32(),
+                          artistAddress:
+                            this.state.royaltiesAddress.to_bech32(),
+                        },
+                        details: { asset: this.state.asset },
+                      };
+
+                      try {
+                        // console.log(wallet);
+                        // console.log(asset);
+                        await Wallet.getAvailableWallets();
+                        const walletUtxos = await Wallet.getUtxos();
+                        const contractVersion = "v3"; //resolveContractVersion(asset);
+                        // console.log(walletUtxos);
+                        const assetUtxo = (
+                          await getLockedUtxosByAsset(
+                            contractAddress(contractVersion).to_bech32(),
+                            asset.details.asset
+                          )
+                        ).find(
+                          (utxo) => utxo.data_hash === asset.status.datumHash
+                        );
+                        // console.log(assetUtxo);
+                        if (assetUtxo) {
+                          const txHash = await purchaseAsset(
+                            asset.status.datum,
+                            {
+                              address: fromBech32(wallet.data.address),
+                              utxos: walletUtxos,
+                            },
+                            {
+                              seller: fromBech32(asset.status.submittedBy),
+                              artist: fromBech32(asset.status.artistAddress),
+                              market: fromBech32(
+                                process.env.REACT_APP_MARTIFY_ADDRESS
+                              ),
+                            },
+                            createTxUnspentOutput(
+                              contractAddress(contractVersion),
+                              assetUtxo
+                            ),
+                            contractVersion
+                          );
+
+                          if (txHash) {
+                            const event = createEvent(
+                              MARKET_TYPE.PURCHASE,
+                              asset.status.datum,
+                              txHash,
+                              wallet.data.address
+                            );
+
+                            console.log({
+                              success: true,
+                              type: MARKET_TYPE.PURCHASE,
+                              txHash,
+                            });
+                          } else {
+                            console.log({ success: false });
+                          }
+                        } else {
+                          console.log({ success: false });
+                        }
+                      } catch (error) {
+                        console.error(
+                          `Unexpected error in purchaseToken. [Message: ${error.message}]`
+                        );
+                        console.log({ success: false });
+                      }
+                    }}
+                  >
+                    Buy
+                  </button>
+                </div >
+              )
+            }]}>
+        </VerticalTabs >
+
+
+
+
+
+
+
 
         <hr style={{ marginTop: "40px", marginBottom: "40px" }} />
 
@@ -1087,7 +1091,7 @@ export default class Dapp extends React.Component {
         {/*<p>{`Signed txBodyCborHex: ${this.state.txBodyCborHex_signed}`}</p>*/}
         <p>{`Submitted Tx Hash: ${this.state.submittedTxHash}`}</p>
         <p>{this.state.submittedTxHash ? "check your wallet !" : ""}</p>
-      </div>
+      </div >
     );
   }
 }

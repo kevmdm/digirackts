@@ -14,7 +14,7 @@ import { toHex } from "../../utils/converter";
 
 export const listAsset = async (
   datum,
-  seller: { address: BaseAddress, utxos: [] },
+  seller,
   version,sa32,ra32
 ) => {
   try {
@@ -63,7 +63,7 @@ export const listAsset = async (
 export const updateListing = async (
   currentDatum,
   newDatum,
-  seller: { address: BaseAddress, utxos: [] },
+  seller,
   assetUtxo,
   currentVersion,
   latestVersion
@@ -119,7 +119,7 @@ export const updateListing = async (
 
 export const cancelListing = async (
   datum,
-  seller: { address: BaseAddress, utxos: [] },
+  seller,
   assetUtxo,
   version
 ) => {
@@ -157,12 +157,8 @@ export const cancelListing = async (
 
 export const purchaseAsset = async (
   datum,
-  buyer: { address: BaseAddress, utxos: [] },
-  beneficiaries: {
-    seller: BaseAddress,
-    artist: BaseAddress,
-    market: BaseAddress,
-  },
+  buyer,
+  beneficiaries,
   assetUtxo,
   version
 ) => {
