@@ -12,6 +12,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@emurgo/cardano-serialization-lib-browser": "file:./cardano/serialization-lib/@emurgo/cardano-serialization-lib-browser",
+    "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.3",
     "buffer": "^6.0.3",
     "dotenv": "^16.0.0",

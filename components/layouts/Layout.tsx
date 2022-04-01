@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Footer, Navbar } from '../ui'
-
-export const Layout = ({children}) => {
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme, lightTheme } from '../../themes'
+export const Layout: FC = ({ children }) => {
   return (
     <div>
-      <Navbar></Navbar>
-      {children}
-      <Footer></Footer>
+      <ThemeProvider theme={lightTheme}>
+        <Navbar></Navbar>
+        {children}
+        <Footer></Footer>
+      </ThemeProvider>
     </div>
 
 
