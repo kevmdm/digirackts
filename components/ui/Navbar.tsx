@@ -17,6 +17,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { border, borderRadius } from '@mui/system';
 import Image from 'next/image';
+import { FC } from 'react';
+import Link from 'next/link';
+//import { Link } from '@mui/material';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -30,7 +34,7 @@ const Search = styled('div')(({ theme }) => ({
   marginLeft: 0,
   width: '100%',
   flexGrow: 1,
-  height: '70px',
+  height: '65px',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
@@ -50,7 +54,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(3, 1, 1, 0),
+    padding: theme.spacing(2.5, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -61,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function PrimarySearchAppBar() {
+const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -159,12 +163,12 @@ function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
+  const shadow = (type == 'standard' ? { boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)" } : null)
+  const position = (type == 'standard' ? 'static' : 'fixed')
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{
-        boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)"
-      }}>
+      <AppBar position={position} sx={shadow}>
         <Toolbar>
           <IconButton
             size="large"
@@ -175,22 +179,26 @@ function PrimarySearchAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
-          <IconButton
-            sx={{
+          <Link href={'/'}>
 
-            }}
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <Image src={"/img/navbar/textLogo.png"} width="279px" height={"73px"}>
+            <IconButton
+              sx={{
 
-            </Image>
-          </IconButton>
+              }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+
+              color="inherit"
+            >
+              <Image src={"/img/navbar/textLogo.png"} width="279px" height={"73px"}>
+
+              </Image>
+            </IconButton>
+          </Link>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -254,7 +262,7 @@ function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Image src={"/img/navbar/walletIcon.svg"} width="30px" height={"30px"}>
+              <Image src={"/img/navbar/walletIcon.svg"} width="33px" height={"33px"}>
 
               </Image>
             </IconButton>
@@ -275,15 +283,15 @@ function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </Box >
   );
 }
 
 
-export const Navbar = () => {
+export const Navbar: FC<{ type?: string }> = ({ type = 'home' }) => {
   return (
 
-    <PrimarySearchAppBar></PrimarySearchAppBar>
+    <PrimarySearchAppBar type={`${type}`}></PrimarySearchAppBar >
 
   )
 }

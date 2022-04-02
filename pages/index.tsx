@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     //<div>hola</div>
     <div>
-      <Layout>
+      <Layout type='home'>
         <h1>Home Layout</h1>
       </Layout>
 
