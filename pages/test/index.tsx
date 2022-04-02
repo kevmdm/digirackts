@@ -9,7 +9,7 @@ export default function HomePage() {
     return (
         <div>
 
-            <Dapp></Dapp>
+            {/* <Dapp></Dapp> */}
 
 
         </div>

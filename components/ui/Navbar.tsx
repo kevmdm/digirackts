@@ -15,10 +15,13 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { border, borderRadius } from '@mui/system';
+import Image from 'next/image';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
+  border: '1px solid #A2A2A2',
+  borderRadius: '100px',//theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -26,6 +29,8 @@ const Search = styled('div')(({ theme }) => ({
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
+  flexGrow: 1,
+  height: '70px',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
@@ -45,7 +50,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(3, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -157,7 +162,7 @@ function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="inherit">
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -168,14 +173,22 @@ function PrimarySearchAppBar() {
           >
             {/* <MenuIcon /> */}
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+          <IconButton
+            sx={{
+
+            }}
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
           >
-            Digirack
-          </Typography>
+            <Image src={"/img/navbar/textLogo.png"} width="279px" height={"73px"}>
+
+            </Image>
+          </IconButton>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -183,25 +196,37 @@ function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => {
+                console.log(e.target.value)
+              }}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+              <Typography fontSize={22}>
+                Explore
+              </Typography>
+            </Box>
+            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+              <Typography fontSize={22}>
+                Resources
+              </Typography>
+            </Box>
+            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+              <Typography fontSize={22}>
+                Create
+              </Typography>
+            </Box>
+            <Box sx={{ padding: "28px 20px 22px 0px" }}>
+              <Typography fontSize={22}>
+                Account
+              </Typography>
+            </Box>
             <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
+              sx={{
+                margin: "17px 35px 17px 0px"
+              }}
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -210,7 +235,26 @@ function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Image src={"/img/navbar/moon.png"} width="30px" height={"30px"}>
+
+              </Image>
+            </IconButton>
+
+            <IconButton
+              sx={{
+                margin: "17px 35px 17px 0px"
+              }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <Image src={"/img/navbar/walletIcon.svg"} width="30px" height={"30px"}>
+
+              </Image>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
