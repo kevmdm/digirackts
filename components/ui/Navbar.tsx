@@ -162,7 +162,9 @@ function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{
+        boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)"
+      }}>
         <Toolbar>
           <IconButton
             size="large"

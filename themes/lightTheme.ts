@@ -64,7 +64,7 @@ export const lightTheme = createTheme({
 
                 root: {
                     backgroundColor: '#0000',
-                    boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)"
+                    //boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)"
 
 
 
@@ -75,6 +75,6 @@ export const lightTheme = createTheme({
         }
     },
     typography: {
-        fontFamily: 'DM Sans', //'roboto'//
+        //fontFamily: 'DM Sans', //'roboto'//
     },
 });
