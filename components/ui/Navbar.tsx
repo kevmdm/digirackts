@@ -19,6 +19,7 @@ import { border, borderRadius } from '@mui/system';
 import Image from 'next/image';
 import { FC } from 'react';
 import Link from 'next/link';
+import ButtonWallet from '../ButtonWallet'
 //import { Link } from '@mui/material';
 
 
@@ -213,36 +214,36 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+            <Box sx={{ padding: "35px 25px 22px 0px" }}>
               <Typography fontSize={22}>
                 Explore
               </Typography>
             </Box>
-            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+            <Box sx={{ padding: "35px 25px 22px 0px" }}>
               <Typography fontSize={22}>
                 Resources
               </Typography>
             </Box>
-            <Box sx={{ padding: "28px 25px 22px 0px" }}>
+            <Box sx={{ padding: "35px 25px 22px 0px" }}>
               <Typography fontSize={22}>
                 Create
               </Typography>
             </Box>
-            <Box sx={{ padding: "28px 20px 22px 0px" }}>
+            <Box sx={{ padding: "35px 20px 22px 0px" }}>
               <Typography fontSize={22}>
                 Account
               </Typography>
             </Box>
             <IconButton
               sx={{
-                margin: "17px 35px 17px 0px"
+                margin: 'auto'//"15px 35px 17px 0px"
               }}
               size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              // onClick={handleProfileMenuOpen}
               color="inherit"
             >
               <Image src={"/img/navbar/moon.png"} width="30px" height={"30px"}>
@@ -250,7 +251,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
               </Image>
             </IconButton>
 
-            <IconButton
+            {/* <IconButton
               sx={{
                 margin: "17px 35px 17px 0px"
               }}
@@ -259,12 +260,26 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              // onClick={handleProfileMenuOpen}
               color="inherit"
             >
               <Image src={"/img/navbar/walletIcon.svg"} width="33px" height={"33px"}>
 
               </Image>
+            </IconButton> */}
+            <IconButton
+              sx={{
+                margin: "25px 35px 17px 15px"
+              }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <ButtonWallet></ButtonWallet>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
