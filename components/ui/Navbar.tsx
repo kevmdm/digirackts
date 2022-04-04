@@ -15,12 +15,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { border, borderRadius, width } from '@mui/system';
 import Image from 'next/image';
 import { FC } from 'react';
 import Link from 'next/link';
-import ButtonWallet from '../ButtonWallet'
-import { Popover } from '@mui/material';
+import { ButtonWallet } from '../ButtonWallet'
+import { ButtonDarkMode } from '../ButtonDarkMode';
 //import { Link } from '@mui/material';
 
 
@@ -76,7 +75,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    console.log(event.currentTarget.accessKey)
+    //console.log(event.currentTarget.accessKey)
     setAnchorEl(event.currentTarget);
   };
 
@@ -85,7 +84,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   };
 
   const handleMenuClose = () => {
-    console.log('close')
+    // console.log('close')
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -97,10 +96,13 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Box
-
+      sx={{ height: '100px', width: '140px', background: 'gray' }}
     >
       <Menu
-
+        sx={{ height: '100px', width: '140px', background: 'gray' }}
+        onClick={() => {
+          console.log('pressing')
+        }}
         onMouseMove={(e) => {
           //console.log('movementx:', e.movementX, ' movementY:', e.movementY);
           if (e.movementX > 2 || e.movementY > 4 || e.movementX < - 2 || e.movementY < - 4)
@@ -123,12 +125,12 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
           horizontal: 'right',
         }}
         open={isMenuOpen}
-        onClose={handleMenuClose}
+      //onClose={handleMenuClose}
 
       >
         {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
         <MenuItem
-          onClick={handleMenuClose}>{anchorEl?.accessKey == 'isDarkMode' ? `Darkmode` : anchorEl?.accessKey == 'buttonWallet' ? `My NFT's` : ''}</MenuItem>
+        >{anchorEl?.accessKey == 'isDarkMode' ? `Darkmode` : anchorEl?.accessKey == 'buttonWallet' ? `My NFT's` : ''}</MenuItem>
       </Menu>
     </Box>
   );
@@ -186,6 +188,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   );
   const shadow = (type == 'standard' ? { boxShadow: "0px 10px 25px rgba(182, 182, 182, 0.25)" } : null)
   const position = (type == 'standard' ? 'static' : 'fixed')
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -249,74 +252,8 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
                 Create
               </Typography>
             </Box>
-            {/* <Box sx={{ padding: "35px 20px 22px 0px" }}>
-              <Typography fontSize={22}>
-                Account
-              </Typography>
-            </Box> */}
-
-            <IconButton
-              onMouseEnter={handleProfileMenuOpen}
-
-              sx={{
-                margin: 'auto',//"15px 35px 17px 0px"
-                //background :'gray'
-
-              }}
-              accessKey='isDarkMode'
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-
-
-              color="inherit"
-
-            >
-              <Image src={"/img/navbar/moon.png"} width="38px" height={"38px"}>
-
-              </Image>
-            </IconButton>
-
-
-
-
-            {/* <IconButton
-              sx={{
-                margin: "17px 35px 17px 0px"
-              }}
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Image src={"/img/navbar/walletIcon.svg"} width="33px" height={"33px"}>
-
-              </Image>
-            </IconButton> */}
-            <IconButton
-              sx={{
-                margin: "17px 35px 17px 0px",//margin: "auto",
-                //background:'gray'
-              }}
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              onMouseEnter={handleProfileMenuOpen}
-
-              color="inherit"
-              accessKey="buttonWallet"
-            >
-              <ButtonWallet></ButtonWallet>
-            </IconButton>
+            <ButtonDarkMode></ButtonDarkMode>
+            <ButtonWallet></ButtonWallet>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -333,7 +270,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+      {/* {renderMenu} */}
     </Box >
   );
 }
