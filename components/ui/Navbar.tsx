@@ -102,7 +102,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
       <Menu
 
         onMouseMove={(e) => {
-          console.log('movementx:', e.movementX, ' movementY:', e.movementY);
+          //console.log('movementx:', e.movementX, ' movementY:', e.movementY);
           if (e.movementX > 2 || e.movementY > 4 || e.movementX < - 2 || e.movementY < - 4)
             handleMenuClose(e);
         }}
