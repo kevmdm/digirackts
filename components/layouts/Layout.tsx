@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Footer, Navbar } from '../ui'
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme, lightTheme } from '../../themes'
-import { CssBaseline, Typography } from '@mui/material';
+import { CssBaseline, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Head from 'next/head';
 
@@ -38,10 +38,12 @@ export const Layout: FC<{ title?: string, type?: string }> = ({ children, title 
                 {type == 'home' ? (
                   <Box sx={{ height: '570px', position: 'relative', zIndex: '100', backgroundImage: `url('/img/home/bannerGradient.png')` }}>
                     {/* <Image src={'/img/home/bannerGradient.png'} layout='fill'></Image> */}
-                    <Typography fontSize={75} fontWeight={700} align={'center'} margin='auto' paddingTop={'200px'}>
+
+                    <Typography fontSize={70} fontWeight={700} align={'center'} margin='auto' paddingTop={'200px'} paddingX={'200px'}>
                       Discover , Collect and sell
                       extraordinary NFTs
                     </Typography>
+
                   </Box>) : (<div></div>)}
               </>
               <Navbar type={`${type}`}></Navbar>

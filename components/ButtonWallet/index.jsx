@@ -81,6 +81,38 @@ const ButtonWallet = ({
       // }
     });
   }
+  function handleClick() {
+
+    //setShow(!show);
+    if (!state_wallet.connected) {
+      // console.log("connecting...");
+
+      onclick_connect_wallet();
+    } else {
+      // if (location.pathname == "/WalletAssets") {
+      //   loadAssets(state_wallet, (res) => {
+      //     if (res.success) {
+      //       //console.log(state_wallet);
+
+      //       if (state_wallet.data.assets) {
+      //         //console.log(state_wallet);
+      //         //console.log(state_wallet.data.assets);
+      //         if (
+      //           state_wallet.data.assets != {} &&
+      //           state_wallet.connected
+      //         ) {
+      //           //if (location.pathname != "/WalletAssets")
+      //           //navigate("/WalletAssets");
+      //         }
+      //       }
+      //     }
+      //   });
+      // } else {
+      //   //navigate("/WalletAssets");
+      // }
+    }
+
+  }
 
   useEffect(() => {
     if (state_wallet.loading) {
@@ -129,53 +161,24 @@ const ButtonWallet = ({
     }
   }, [loadAssets, state_wallet]);
 
+
+
   return (
 
-    (<Box 
-      onClick={() => {
-        //setShow(!show);
-        if (!state_wallet.connected) {
-          // console.log("connecting...");
-
-          onclick_connect_wallet();
-        } else {
-          // if (location.pathname == "/WalletAssets") {
-          //   loadAssets(state_wallet, (res) => {
-          //     if (res.success) {
-          //       //console.log(state_wallet);
-
-          //       if (state_wallet.data.assets) {
-          //         //console.log(state_wallet);
-          //         //console.log(state_wallet.data.assets);
-          //         if (
-          //           state_wallet.data.assets != {} &&
-          //           state_wallet.connected
-          //         ) {
-          //           //if (location.pathname != "/WalletAssets")
-          //           //navigate("/WalletAssets");
-          //         }
-          //       }
-          //     }
-          //   });
-          // } else {
-          //   //navigate("/WalletAssets");
-          // }
-        }
-      }}
-
-    >
-      {state_wallet.connected ? (
-        <Image src={"/img/navbar/walletIcon.svg"} width="33px" height={"33px"}>
+    (< >      {
+      state_wallet.connected ? (
+        <Image src={"/img/navbar/walletIcon.png"} width="38px" height={"38px"} onClick={handleClick}>
 
         </Image>
       ) : (
 
-        <Image src={"/img/navbar/walletIcon.svg"} width="33px" height={"33px"}>
+        <Image src={"/img/navbar/walletIcon.png"} width="38px" height={"38px"} onClick={handleClick}>
 
         </Image>
 
-      )}
-    </Box>)
+      )
+    }</>
+    )
 
   );
 };
