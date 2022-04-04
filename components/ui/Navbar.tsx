@@ -249,17 +249,17 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
                 Create
               </Typography>
             </Box>
-            <Box sx={{ padding: "35px 20px 22px 0px" }}>
+            {/* <Box sx={{ padding: "35px 20px 22px 0px" }}>
               <Typography fontSize={22}>
                 Account
               </Typography>
-            </Box>
+            </Box> */}
 
             <IconButton
               onMouseEnter={handleProfileMenuOpen}
 
               sx={{
-                //margin: 'auto',//"15px 35px 17px 0px"
+                margin: 'auto',//"15px 35px 17px 0px"
                 //background :'gray'
 
               }}
@@ -301,7 +301,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
             </IconButton> */}
             <IconButton
               sx={{
-                //margin: "auto",
+                margin: "17px 35px 17px 0px",//margin: "auto",
                 //background:'gray'
               }}
               size="large"
