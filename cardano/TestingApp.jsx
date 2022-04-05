@@ -921,7 +921,7 @@ export default class Dapp extends React.Component {
                         console.log(datumsa32);
 
                         const contractVersion =
-                          process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+                          process.env.NEXT_PUBLIC_MARTIFY_CONTRACT_VERSION;
 
                         const listObj = await listAsset(
                           datum,

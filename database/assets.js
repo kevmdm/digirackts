@@ -81,7 +81,9 @@ export const getAsset = async (assetId) => {
  * @throws COULD_NOT_RETRIEVE_ASSET_FROM_DB
  */
 export const getAssets = async (assetIds) => {
+  console.log(typeof assetIds)
   if (assetIds) {
+
     const assets = await Promise.all(
       assetIds.map(async (assetId) => await getAsset(assetId))
     );

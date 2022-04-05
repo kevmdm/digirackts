@@ -2,15 +2,13 @@ import Cardano from "../../cardano/serialization-lib";
 import Wallet from "../../cardano/wallet";
 
 import {
-  getAssets,
   lockAsset,
   unlockAsset,
   addAssetEvent,
 } from "../../database/assets";
 import { getCollection } from "../../database/collections";
 import {
-  getWallet,
-  addWalletEvent,
+
   listWalletAsset,
   delistWalletAsset,
   relistWalletAsset,
@@ -40,12 +38,7 @@ import { collections_add_tokens } from "../collection/collectionActions";
 import { fromBech32 } from "../../utils/converter";
 import { createEvent, createDatum } from "../../utils/factory";
 import { resolveError } from "../../utils/resolver";
-import axios from 'axios';
-
-
-const walletsApi = axios.create({
-  baseURL: '/api'
-})
+import { walletsApi, addWalletEvent,getAssets } from '../../api'
 
 export const availableWallets = (callback) => async (dispatch) => {
   //console.log('availablewallets')
@@ -71,16 +64,14 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
         const usedAddresses = await Wallet.getUsedAddresses();
         const walletAddress = await getWalletAddress(usedAddresses);
         //console.log(walletAddress)
-        const data = await walletsApi.post('/wallet',{
-          address: walletAddress
-        })
-        
+        const data = await walletsApi(walletAddress)
+
         const connectedWallet = {
           provider: {
             network: walletNetworkId,
             collateral: await Wallet.getCollateral(),
           },
-          data: data.data//getWallet(walletAddress),
+          data: data//getWallet(walletAddress),
         };
 
         dispatch(walletConnected(connectedWallet));
@@ -175,7 +166,7 @@ export const listToken =
       );
       // console.log(datum)
 
-      const contractVersion = process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+      const contractVersion = process.env.NEXT_PUBLIC_MARTIFY_CONTRACT_VERSION;
       //console.log(contractVersion);
       const listObj = await listAsset(
         datum,
@@ -254,7 +245,7 @@ export const relistToken =
 
       const walletUtxos = await Wallet.getUtxos();
       const currentVersion = resolveContractVersion(asset);
-      const latestVersion = process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+      const latestVersion = process.env.NEXT_PUBLIC_MARTIFY_CONTRACT_VERSION;
 
       const assetUtxo = (
         await getLockedUtxosByAsset(
@@ -475,7 +466,7 @@ export const purchaseToken = (wallet, asset, callback) => async (dispatch) => {
         {
           seller: fromBech32(asset.status.submittedBy),
           artist: fromBech32(asset.status.artistAddress),
-          market: fromBech32(process.env.REACT_APP_MARTIFY_ADDRESS),
+          market: fromBech32(process.env.NEXT_PUBLIC_MARTIFY_ADDRESS),
         },
         createTxUnspentOutput(contractAddress(contractVersion), assetUtxo),
         contractVersion
@@ -498,7 +489,7 @@ export const purchaseToken = (wallet, asset, callback) => async (dispatch) => {
         const updatedAsset = await addAssetEvent(unlockedAsset, event);
 
         // Update the seller's wallet
-        const sellerWalletObj = await getWallet(asset.status.submittedBy);
+        const sellerWalletObj = await walletsApi(asset.status.submittedBy);
 
         const soldEvent = createEvent(
           MARKET_TYPE.SOLD,
@@ -590,5 +581,5 @@ const resolveContractVersion = (asset) => {
   if (asset.status.contractVersion) {
     return asset.status.contractVersion;
   }
-  return process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+  return process.env.NEXT_PBLIC_MARTIFY_CONTRACT_VERSION;
 };

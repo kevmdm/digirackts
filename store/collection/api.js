@@ -186,7 +186,7 @@ export const get_listed_assets =
   (count, lastVisible, callback) => async (dispatch) => {
     try {
       // await Cardano.load();
-      // const contractVersion = process.env.REACT_APP_MARTIFY_CONTRACT_VERSION;
+      // const contractVersion = process.env.NEXT_PUBLIC_MARTIFY_CONTRACT_VERSION;
 
       // const listed = await getLockedUtxos(
       //   contractAddress(contractVersion).to_bech32(),
