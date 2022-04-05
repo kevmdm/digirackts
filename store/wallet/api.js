@@ -42,6 +42,7 @@ import { createEvent, createDatum } from "../../utils/factory";
 import { resolveError } from "../../utils/resolver";
 
 export const availableWallets = (callback) => async (dispatch) => {
+  //console.log('availablewallets')
   await Cardano.load();
 
   callback({

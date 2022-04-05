@@ -18,7 +18,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
 import { FC } from 'react';
 import Link from 'next/link';
-import { ButtonWallet } from '../ButtonWallet'
+import ButtonWallet from '../ButtonWallet'
 import { ButtonDarkMode } from '../ButtonDarkMode';
 //import { Link } from '@mui/material';
 
@@ -94,7 +94,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   };
 
   const menuId = 'primary-search-account-menu';
-  
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
