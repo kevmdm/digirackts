@@ -19,16 +19,9 @@ export const ButtonDarkMode: FC<state> = ({ isDarkMode = false }) => {
                     margin: "auto",//margin: "auto",
                     //background:'gray'
                 }}
-                // size="large"
-                // edge="end"
-                // aria-label="account of current user"
-                // //aria-controls={menuId}
-                // aria-haspopup="true"
+
                 onClick={() => { handleClick() }}
-                //onMouseEnter={onMouseEnter}
 
-
-                // color="inherit"
                 accessKey="isDarkMode"
             >     {
                     isDarkMode ? (

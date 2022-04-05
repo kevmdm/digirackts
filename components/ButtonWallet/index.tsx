@@ -16,19 +16,12 @@ export const ButtonWallet: FC<state> = ({ state_wallet = { connected: false } })
 
             <IconButton
                 sx={{
-                    margin: "17px 35px 17px 0px",//margin: "auto",
+                    margin: "17px 35px 17px 15px",//margin: "auto",
                     //background:'gray'
                 }}
-                // size="large"
-                // edge="end"
-                // aria-label="account of current user"
-                // //aria-controls={menuId}
-                // aria-haspopup="true"
+
                 onClick={() => { handleClick() }}
-                //onMouseEnter={onMouseEnter}
 
-
-                // color="inherit"
                 accessKey="buttonWallet"
             >     {
                     state_wallet.connected ? (
