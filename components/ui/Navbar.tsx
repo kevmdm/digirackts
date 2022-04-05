@@ -94,47 +94,7 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Box
-      sx={{ height: '100px', width: '140px', background: 'gray' }}
-    >
-      <Menu
-        sx={{ height: '100px', width: '140px', background: 'gray' }}
-        onClick={() => {
-          console.log('pressing')
-        }}
-        onMouseMove={(e) => {
-          //console.log('movementx:', e.movementX, ' movementY:', e.movementY);
-          if (e.movementX > 2 || e.movementY > 4 || e.movementX < - 2 || e.movementY < - 4)
-            handleMenuClose(e);
-        }}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-
-        // anchorPosition={{
-        //   left:1,
-        //   top:50
-        // }}
-        id={menuId}
-        keepMounted={true}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={isMenuOpen}
-      //onClose={handleMenuClose}
-
-      >
-        {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
-        <MenuItem
-        >{anchorEl?.accessKey == 'isDarkMode' ? `Darkmode` : anchorEl?.accessKey == 'buttonWallet' ? `My NFT's` : ''}</MenuItem>
-      </Menu>
-    </Box>
-  );
-
+  
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
