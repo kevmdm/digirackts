@@ -14,23 +14,36 @@ type Data = {
     name: string
 }
 
-export default function (req: NextApiRequest, res: NextApiResponse<DocumentData>) {
+export default async function (req: NextApiRequest, res: NextApiResponse<DocumentData>) {
     switch (req.method) {
         case 'GET':
-            if (req.query) {
-                console.log(req.query)
-                const { address } = req.query
-                //console.log('body:', req.body)
-                // console.log('address:', address)
-                getWalletData(address, res);
+            try {
+                if (req.query) {
+                    //console.log(req.query)
+                    const { address } = req.query
+                    //console.log('body:', req.body)
+                    // console.log('address:', address)
+                    getWalletData(address, res);
+                }
+            } catch (error) {
+                console.log(error)
+                res.status(400).json({ message: 'bad query' })
             }
+
             break;
         case 'POST':
-            if (req.body) {
+            try {
+                if (req.body) {
 
-                console.log(req.body.wallet)
-                addWalletEventData(req, res)
+                    console.log(req.body.wallet)
+                    await addWalletEventData(req, res)
+                }
+
+            } catch (error) {
+                console.log(error)
+                res.status(400).json({ message: 'bad query' })
             }
+
             //add walletevent database
             //res.status(200).json({ message: 'event added' + ` ${req.body.wallet} ${req.body.event}` })
 
@@ -55,5 +68,14 @@ async function addWalletEventData(req: NextApiRequest, res: NextApiResponse<any>
     const event = req.body.event
     const resp = await addWalletEvent(wallet, event)
     res.status(200).json(resp)
+    // try {
+    //     const resp = await addWalletEvent(wallet, event)
+    //     res.status(200).json(resp)
+    // } catch (error) {
+    //     console.log(error)
+    //     res.status(400).json({ message: 'bad query 1' })
+    // }
+
+
 
 }
