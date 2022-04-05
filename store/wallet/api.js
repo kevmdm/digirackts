@@ -63,26 +63,18 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
     dispatch(setWalletLoading(WALLET_STATE.CONNECTING));
 
     if (await Wallet.enable(provider)) {
-      console.log(process.env.NEXT_PUBLIC_CARDANO_NETWORK_ID)
+      //console.log(process.env.NEXT_PUBLIC_CARDANO_NETWORK_ID)
       const usedNetworkId = parseInt(process.env.NEXT_PUBLIC_CARDANO_NETWORK_ID);
       const walletNetworkId = await Wallet.getNetworkId();
 
       if (usedNetworkId === walletNetworkId) {
         const usedAddresses = await Wallet.getUsedAddresses();
         const walletAddress = await getWalletAddress(usedAddresses);
-        console.log(walletAddress)
+        //console.log(walletAddress)
         const data = await walletsApi.post('/wallet',{
           address: walletAddress
         })
-        // const data = await fetch('/api/wallet', {
-        //   method: 'POST',
-
-        //   body: 
-        // }
-
-        // )
-        console.log(data)
-        console.log(data.data)
+        
         const connectedWallet = {
           provider: {
             network: walletNetworkId,

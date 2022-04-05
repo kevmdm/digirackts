@@ -15,7 +15,7 @@ export const walletExists = async (address) => {
  * @throws COULD_NOT_RETRIEVE_WALLET_FROM_DB
  */
 export const getWallet = async (address) => {
-  console.log(address)
+  //console.log(address)
   try {
     if (address) {
       const reference = doc(firestore, "wallets", address);
