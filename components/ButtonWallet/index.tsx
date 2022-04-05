@@ -44,10 +44,11 @@ const ButtonWallet: FC<Button_Wallet> = ({ state_wallet, availableWallets, conne
             if (!res.success) {
                 // NotificationManager.error(`${res.msg}`);
                 // setShowNotificationMessage(res.msg);
+                console.log(res)
             } //  else {
             //   NotificationManager.success(`connected ${wallet_name}`);
             // }
-            // console.log('connected')
+             console.log(state_wallet)
         });
     }
     function handleClick() {
@@ -56,6 +57,8 @@ const ButtonWallet: FC<Button_Wallet> = ({ state_wallet, availableWallets, conne
             console.log("connecting...");
 
             onclick_connect_wallet();
+        }else{
+            console.log(state_wallet)
         }
         // throw new Error('Function not implemented.')
     }

@@ -1,6 +1,7 @@
 import * as types from "./walletTypes";
 
 export function walletConnected(payload) {
+  console.log('really connected')
   return {
     type: types.WALLET_CONNECTED,
     payload: payload

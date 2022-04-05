@@ -40,6 +40,12 @@ import { collections_add_tokens } from "../collection/collectionActions";
 import { fromBech32 } from "../../utils/converter";
 import { createEvent, createDatum } from "../../utils/factory";
 import { resolveError } from "../../utils/resolver";
+import axios from 'axios';
+
+
+const walletsApi = axios.create({
+  baseURL: '/api'
+})
 
 export const availableWallets = (callback) => async (dispatch) => {
   //console.log('availablewallets')
@@ -57,19 +63,32 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
     dispatch(setWalletLoading(WALLET_STATE.CONNECTING));
 
     if (await Wallet.enable(provider)) {
-      const usedNetworkId = parseInt(process.env.REACT_APP_CARDANO_NETWORK_ID);
+      console.log(process.env.NEXT_PUBLIC_CARDANO_NETWORK_ID)
+      const usedNetworkId = parseInt(process.env.NEXT_PUBLIC_CARDANO_NETWORK_ID);
       const walletNetworkId = await Wallet.getNetworkId();
 
       if (usedNetworkId === walletNetworkId) {
         const usedAddresses = await Wallet.getUsedAddresses();
         const walletAddress = await getWalletAddress(usedAddresses);
+        console.log(walletAddress)
+        const data = await walletsApi.post('/wallet',{
+          address: walletAddress
+        })
+        // const data = await fetch('/api/wallet', {
+        //   method: 'POST',
 
+        //   body: 
+        // }
+
+        // )
+        console.log(data)
+        console.log(data.data)
         const connectedWallet = {
           provider: {
             network: walletNetworkId,
             collateral: await Wallet.getCollateral(),
           },
-          data: await getWallet(walletAddress),
+          data: data.data//getWallet(walletAddress),
         };
 
         dispatch(walletConnected(connectedWallet));
@@ -144,7 +163,7 @@ export const listToken =
       const royaltiesAddress = collectionDetails?.royaltiesWallet1
         ? collectionDetails.royaltiesWallet2
           ? collectionDetails.royaltiesWallet1 +
-            collectionDetails.royaltiesWallet2
+          collectionDetails.royaltiesWallet2
           : wallet.data.address
         : wallet.data.address;
       // console.log(royaltiesAddress);

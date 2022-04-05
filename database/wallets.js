@@ -15,11 +15,13 @@ export const walletExists = async (address) => {
  * @throws COULD_NOT_RETRIEVE_WALLET_FROM_DB
  */
 export const getWallet = async (address) => {
+  console.log(address)
   try {
     if (address) {
       const reference = doc(firestore, "wallets", address);
       const snapshot = await getDoc(reference);
       if (snapshot.exists()) {
+        console.log(snapshot.data)
         return snapshot.data();
       } else {
         const wallet = {
@@ -30,6 +32,7 @@ export const getWallet = async (address) => {
           offers: [],
         };
         await saveWallet(wallet, address);
+        console.log(wallet)
         return wallet;
       }
     }
