@@ -9,7 +9,6 @@ import {
 import { getCollection } from "../../database/collections";
 import {
 
-  listWalletAsset,
   delistWalletAsset,
   relistWalletAsset,
   walletExists,
@@ -38,7 +37,7 @@ import { collections_add_tokens } from "../collection/collectionActions";
 import { fromBech32 } from "../../utils/converter";
 import { createEvent, createDatum } from "../../utils/factory";
 import { resolveError } from "../../utils/resolver";
-import { walletsApi, addWalletEvent,getAssets } from '../../api'
+import { walletsApi, addWalletEvent,getAssets,listWalletAsset } from '../../api'
 
 export const availableWallets = (callback) => async (dispatch) => {
   //console.log('availablewallets')

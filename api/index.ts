@@ -18,7 +18,7 @@ export async function walletsApi(walletAddress: string) {
 export async function addWalletEvent(wallet, newEvent) {
     const walletEvent = await Api.post('/wallet', {
         params: {
-
+            type: 'addWalletEvent',
             wallet,
             newEvent
 
@@ -37,4 +37,17 @@ export async function getAssets(assetIds: []) {
     })
     return walletData.data
 
+}
+
+export async function listWalletAsset(wallet, walletAsset, newEvent) {
+    const _listWalletAssset = await Api.post('/wallet', {
+        params: {
+            type: 'listWalletAssset',
+            wallet,
+            walletAsset,
+            newEvent
+
+        }
+    })
+    return _listWalletAssset.data
 }
