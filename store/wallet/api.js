@@ -1,18 +1,6 @@
 import Cardano from "../../cardano/serialization-lib";
 import Wallet from "../../cardano/wallet";
 
-import {
-  lockAsset,
-  unlockAsset,
-  addAssetEvent,
-} from "../../database/assets";
-import { getCollection } from "../../database/collections";
-import {
-
-  delistWalletAsset,
-  relistWalletAsset,
-  walletExists,
-} from "../../database/wallets";
 import { WALLET_STATE, MARKET_TYPE } from "./walletTypes";
 import {
   walletConnected,
@@ -32,12 +20,11 @@ import {
   serializeTxUnspentOutput,
   valueToAssets,
 } from "../../cardano/transaction";
-import { getLockedUtxosByAsset } from "../../cardano/blockfrost-api";
 import { collections_add_tokens } from "../collection/collectionActions";
 import { fromBech32 } from "../../utils/converter";
 import { createEvent, createDatum } from "../../utils/factory";
 import { resolveError } from "../../utils/resolver";
-import { walletsApi, addWalletEvent,getAssets,listWalletAsset } from '../../api'
+import { getWallet, addWalletEvent, getAssets, listWalletAsset, delistWalletAsset, relistWalletAsset, walletExists, getLockedUtxosByAsset, lockAsset, unlockAsset, addAssetEvent } from '../../api'
 
 export const availableWallets = (callback) => async (dispatch) => {
   //console.log('availablewallets')
@@ -63,7 +50,7 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
         const usedAddresses = await Wallet.getUsedAddresses();
         const walletAddress = await getWalletAddress(usedAddresses);
         //console.log(walletAddress)
-        const data = await walletsApi(walletAddress)
+        const data = await getWallet(walletAddress)
 
         const connectedWallet = {
           provider: {
@@ -488,7 +475,7 @@ export const purchaseToken = (wallet, asset, callback) => async (dispatch) => {
         const updatedAsset = await addAssetEvent(unlockedAsset, event);
 
         // Update the seller's wallet
-        const sellerWalletObj = await walletsApi(asset.status.submittedBy);
+        const sellerWalletObj = await getWallet(asset.status.submittedBy);
 
         const soldEvent = createEvent(
           MARKET_TYPE.SOLD,

@@ -2,14 +2,9 @@ import { registerVersion } from 'firebase/app'
 import { DocumentData } from 'firebase/firestore'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { json } from 'stream/consumers';
-import { listWalletAsset } from '../../../api';
-import { addWalletEvent, getWallet } from '../../../database/wallets'
+import { listWalletAsset, walletExists } from '../../../api';
+import { addWalletEvent, delistWalletAsset, getWallet } from '../../../database/wallets'
 import StateWallet from '../../../interfaces/stateWallet/index';
-
-
-
-
-
 
 type Data = {
     name: string
@@ -20,11 +15,19 @@ export default async function (req: NextApiRequest, res: NextApiResponse<Documen
         case 'GET':
             try {
                 if (req.query) {
-                    //console.log(req.query)
-                    const { address } = req.query
-                    //console.log('body:', req.body)
-                    // console.log('address:', address)
-                    getWalletData(address, res);
+                    const { address, type } = req.query
+                    switch (type) {
+                        case 'exist':
+                            walletExistData(address, res);
+                            break;
+                        case 'getWallet':
+                            getWalletData(address, res);
+                            break;
+
+                        default:
+                            break;
+                    }
+
                 }
             } catch (error) {
                 console.log(error)
@@ -44,6 +47,12 @@ export default async function (req: NextApiRequest, res: NextApiResponse<Documen
                         case 'listWalletAsset':
                             listWalletAssetApi(req, res)
                             break;
+                        case 'delistWalletAsset':
+                            delistWalletAssetApi(req, res)
+                            break;
+                        case 'relistWalletAsset':
+                            relistWalletAssetApi(req, res)
+                            break;
                         default:
                             res.status(400).json({ message: 'not defined' })
                             break;
@@ -56,33 +65,38 @@ export default async function (req: NextApiRequest, res: NextApiResponse<Documen
                 res.status(400).json({ message: 'bad query' })
             }
 
-            //add walletevent database
-            //res.status(200).json({ message: 'event added' + ` ${req.body.wallet} ${req.body.event}` })
-
             break;
 
         default:
             res.status(400).json({ message: 'not defined' })
             break;
     }
-
-
+}
+async function walletExistData(address: string | string[], res: NextApiResponse) {
+    const walletData = await walletExists(address.toString())
+    res.status(200).json(walletData)
 }
 async function getWalletData(address: string | string[], res: NextApiResponse<DocumentData>) {
-
     const walletData = await getWallet(address.toString())
-    //console.log(walletData)
     res.status(200).json(walletData)
-    //res.status(200).json(JSON.parse(JSON.stringify(walletData)))
 }
 async function addWalletEventData(req: NextApiRequest, res: NextApiResponse<any>) {
     const { wallet, event } = req.body
     const resp = await addWalletEvent(wallet, event)
     res.status(200).json(resp)
-
 }
 async function listWalletAssetApi(req: NextApiRequest, res: NextApiResponse<any>) {
     const { wallet, walletAsset, event } = req.body
     const resp = await listWalletAsset(wallet, walletAsset, event)
+    res.status(200).json(resp)
+}
+async function delistWalletAssetApi(req: NextApiRequest, res: NextApiResponse<any>) {
+    const { wallet, listedAsset, event } = req.body
+    const resp = await delistWalletAsset(wallet, listedAsset, event)
+    res.status(200).json(resp)
+}
+async function relistWalletAssetApi(req: NextApiRequest, res: NextApiResponse<any>) {
+    const { wallet, listedAsset, event } = req.body
+    const resp = await delistWalletAsset(wallet, listedAsset, event)
     res.status(200).json(resp)
 }

@@ -21,7 +21,7 @@ export const getWallet = async (address) => {
       const reference = doc(firestore, "wallets", address);
       const snapshot = await getDoc(reference);
       if (snapshot.exists()) {
-        console.log(snapshot.data)
+        //console.log(snapshot.data)
         return snapshot.data();
       } else {
         const wallet = {
