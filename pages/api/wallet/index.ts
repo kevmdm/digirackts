@@ -1,14 +1,8 @@
 import { registerVersion } from 'firebase/app'
 import { DocumentData } from 'firebase/firestore'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { json } from 'stream/consumers';
 import { listWalletAsset, walletExists } from '../../../api';
 import { addWalletEvent, delistWalletAsset, getWallet } from '../../../database/wallets'
-import StateWallet from '../../../interfaces/stateWallet/index';
-
-type Data = {
-    name: string
-}
 
 export default async function (req: NextApiRequest, res: NextApiResponse<DocumentData>) {
     switch (req.method) {
