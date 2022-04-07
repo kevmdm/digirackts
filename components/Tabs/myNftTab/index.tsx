@@ -55,9 +55,10 @@ export default function MyNftTab() {
           sx={{
             "& .MuiTabs-indicator": {
               display: "flex",
-              justifyContent: "start",
+              justifyContent: "center",
               //color: "black",
-              maxWidth: "120px",
+              ///maxWidth: "120px",
+              //backgroundColor:'transparent'
             },
           }}
           aria-label="basic tabs example"
@@ -88,6 +89,7 @@ export default function MyNftTab() {
                 <Box
                   sx={{
                     marginLeft: "5px",
+                    paddingX: "5px",
                     color: "text.secondary",
                     backgroundColor: "primary.main",
                     borderRadius: 100,
@@ -103,8 +105,6 @@ export default function MyNftTab() {
             {...a11yProps(1)}
             sx={{
               mx: 1,
-              textAlign: "start",
-              justifyContent: "start",
               textTransform: "none",
               fontSize: 25,
               fontWeight: 500,
@@ -119,21 +119,21 @@ export default function MyNftTab() {
                 width: "100%",
               },
             }}
-            iconPosition={"end"}
-            icon={
-              <>
-                <Box
-                  sx={{
-                    marginLeft: "5px",
-                    color: "text.secondary",
-                    backgroundColor: "primary.main",
-                    borderRadius: 100,
-                  }}
-                >
-                  <Typography paddingX={"5px"}>122</Typography>
-                </Box>
-              </>
-            }
+            // iconPosition={"end"}
+            // icon={
+            //   <>
+            //     <Box
+            //       sx={{
+            //         marginLeft: "5px",
+            //         color: "text.secondary",
+            //         backgroundColor: "primary.main",
+            //         borderRadius: 100,
+            //       }}
+            //     >
+            //       <Typography paddingX={"5px"}>122</Typography>
+            //     </Box>
+            //   </>
+            // }
           />
         </Tabs>
       </Box>
