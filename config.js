@@ -4,6 +4,6 @@ export const cardanoUrl = process.env.REACT_APP_BLOCKFROST_API_URL;
 
 export const urls = {
   root: "http://martify.io/",
-  cardanoscan: process.env.REACT_APP_CARDANOSCAN_URL,
+  cardanoscan: process.env.NEXT_PUBLIC_CARDANOSCAN_URL,
   ipfs: "https://infura-ipfs.io/ipfs/"
 }
