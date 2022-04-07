@@ -3,6 +3,12 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import store from "../../../interfaces/store";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { loadAssets } from "../../../store/wallet/api";
+import { FC, useEffect } from "react";
+import StateWallet from "../../../interfaces/stateWallet";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,13 +42,41 @@ function a11yProps(index: number) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+type MyNftTabParams = {
+  state_wallet: StateWallet;
+  loadAssets: (
+    wallet: StateWallet,
+    callback: (res: LoadAssetResp) => void
+  ) => any;
+};
+type LoadAssetResp = {
+  success: boolean | undefined;
+};
 
-export default function MyNftTab() {
+const MyNftTab: FC<MyNftTabParams> = ({ state_wallet, loadAssets }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+  useEffect(() => {
+    console.log("useEfect");
+    if (
+      !state_wallet.loaded_assets &&
+      state_wallet.connected &&
+      state_wallet.loading != "GETTING_ASSETS"
+    ) {
+      loadAssets(state_wallet, (res: LoadAssetResp) => {
+        if (res.success) {
+          console.log(state_wallet.data.assets);
+        }
+      });
+    }
+
+    // return () => {
+    //   second;
+    // };
+  }, [loadAssets, state_wallet]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -145,4 +179,20 @@ export default function MyNftTab() {
       </TabPanel>
     </Box>
   );
+};
+function mapStateToProps(state: store) {
+  return {
+    state_wallet: state.wallet,
+  };
 }
+function mapDispatchToProps(dispatch: any) {
+  return {
+    loadAssets: (wallet: StateWallet, callback: () => void) =>
+      dispatch(loadAssets(wallet, callback)),
+
+    // availableWallets: (callback) => dispatch(availableWallets(callback)),
+    // connectWallet: (is_silent, callback) =>
+    //   dispatch(connectWallet(is_silent, callback)),
+  };
+}
+export default compose(connect(mapStateToProps, mapDispatchToProps))(MyNftTab);

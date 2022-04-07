@@ -17,12 +17,18 @@ export default function (
 ) {
   switch (req.method) {
     case "GET":
-      if (req.query) {
-        const { assets } = req.query;
-        getAssetsData(assets, res);
-      } else {
-        res.status(400).json({ message: "query error" });
+      try {
+        if (req.query) {
+          const { assets } = req.query;
+          console.log(assets)
+          getAssetsData(assets, res);
+        } else {
+          res.status(400).json({ message: "query error" });
+        }
+      } catch (error) {
+        res.status(500).json(error);
       }
+
       break;
     case "POST":
       if (req.body) {
@@ -35,7 +41,7 @@ export default function (
             unlockAssetData(asset, data);
             break;
           case "addAssetEvent":
-            unlockAssetData(asset, newEvent);
+            addAssetEventData(asset, newEvent);
             break;
 
           default:

@@ -4,10 +4,11 @@ export const Api = axios.create({
   baseURL: "/api",
 });
 
-export async function getAssets(assetIds: []) {
+export async function getAssets(assetIds) {
+  console.log(assetIds);
   const walletData = await Api.get("/assets", {
     params: {
-      assetIds,
+      assets: { ids: assetIds },
     },
   });
   return walletData.data;
@@ -72,6 +73,7 @@ export async function getWallet(walletAddress: string) {
       address: walletAddress,
     },
   });
+  //console.log(walletData)
   return walletData.data;
 }
 export async function addWalletEvent(wallet, newEvent) {

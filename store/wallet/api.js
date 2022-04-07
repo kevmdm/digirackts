@@ -59,7 +59,7 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
           },
           data: data//getWallet(walletAddress),
         };
-
+        //console.log(connectedWallet);
         dispatch(walletConnected(connectedWallet));
         callback({
           success: true,
@@ -86,11 +86,12 @@ export const connectWallet = (provider, callback) => async (dispatch) => {
 };
 
 export const loadAssets = (wallet, callback) => async (dispatch) => {
+  console.log('loading assets')
   try {
     dispatch(setWalletLoading(WALLET_STATE.GETTING_ASSETS));
 
     const walletAssets = await getWalletAssets();
-    //console.log(walletAssets)
+    console.log(walletAssets)
     const assets = (await getAssets(walletAssets)).reduce((map, asset) => {
       map[asset.details.asset] = asset;
       return map;
