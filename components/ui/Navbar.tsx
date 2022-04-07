@@ -155,18 +155,10 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position={position} sx={shadow}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Link href={"/"}>
+          
+          <Link href={"/"} >
             <IconButton
-              sx={{}}
+              sx={{ml:'50px'}}
               size="large"
               edge="end"
               aria-label="account of current user"

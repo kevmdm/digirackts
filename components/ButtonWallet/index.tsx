@@ -17,6 +17,7 @@ import { WALLET_STATE } from "../../store/wallet/walletTypes";
 import { availableWallets, connectWallet } from "../../store/wallet/api";
 import { compose } from "redux";
 import { WalletConnectedDialog } from "../Dialogs";
+import { Router, useRouter } from "next/router";
 
 type Button_Wallet = {
   state_wallet: StateWallet;
@@ -31,6 +32,7 @@ const ButtonWallet: FC<Button_Wallet> = ({
 }) => {
   const [showConnected, setshowConnected] = useState(false);
   const dispatch = useDispatch();
+  const router = useRouter();
   function onclick_connect_wallet() {
     availableWallets((res) => {
       //console.log(res);
@@ -63,6 +65,7 @@ const ButtonWallet: FC<Button_Wallet> = ({
 
       onclick_connect_wallet();
     } else {
+      router.replace("/mynfts");
       console.log(state_wallet);
     }
     // throw new Error('Function not implemented.')
