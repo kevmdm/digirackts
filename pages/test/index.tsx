@@ -22,9 +22,9 @@ export default function TestPage() {
           backgroundColor: "#F9F9F9",
         }}
       >
-        <Grid container sx={{maxWidth:"98%",  ml: "5%", paddingTop: "4%"}}>
+        <Grid container sx={{maxWidth:"95%" , paddingTop: "4%"}}>
           {/* Logo row start  */}
-          <Grid item xs={5}>
+          <Grid item xs={5} sx={{ml: "5%"}}>
             <Grid container>
               <Grid item xs={12}>
                 <Link href={"/"}>
