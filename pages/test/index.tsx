@@ -14,19 +14,17 @@ import { Padding } from "@mui/icons-material";
 
 export default function TestPage() {
   return (
-    <>
-      <Box sx={{ height: "200px" }}></Box>
+    <div>
       <Box
         sx={{
           flexGrow: 1,
-          height: 740,
+          height: 540,
           backgroundColor: "#F9F9F9",
         }}
       >
-        <Grid container sx={{ ml: "4%", paddingTop: "4%" }}>
+        <Grid container sx={{maxWidth:"98%",  ml: "5%", paddingTop: "4%"}}>
           {/* Logo row start  */}
-
-          <Grid item xs={5.5}>
+          <Grid item xs={5}>
             <Grid container>
               <Grid item xs={12}>
                 <Link href={"/"}>
@@ -50,20 +48,18 @@ export default function TestPage() {
                   </IconButton>
                 </Link>
               </Grid>
-
               <Grid item xs={12}>
                 <Typography
-                  paddingRight={"1%"}
+                  paddingRight={"25%"}
                   paddingTop={"4%"}
                   paddingLeft={"2%"}
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Necessitatibus vitae earum provident iste enim quia officiis
-                  temporibus, quasi adipisci alias, dolorem ratione laboriosam
-                  rem maxime? Earum, veniam distinctio? Quibusdam, dolore?
+                  temporibus, quasi adipisci alias, dolorem ratione laboriosam rem
+                  maxime? Earum, veniam distinctio? Quibusdam, dolore?
                 </Typography>
               </Grid>
-
               <Box sx={{ gridRowStart: "auto" }}>
                 <NextLink href={"/"}>
                   <IconButton
@@ -76,6 +72,7 @@ export default function TestPage() {
                       "&:hover": {
                         backgroundColor: "transparent",
                       },
+                      paddingTop: "20%",
                     }}
                   >
                     <Image
@@ -96,6 +93,7 @@ export default function TestPage() {
                       "&:hover": {
                         backgroundColor: "transparent",
                       },
+                      paddingTop: "20%",
                     }}
                   >
                     <Image
@@ -114,7 +112,6 @@ export default function TestPage() {
               <Grid item xs={12}>
                 <Typography variant="h6">Browse</Typography>
               </Grid>
-
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/explore" passHref>
                   <Link
@@ -131,15 +128,12 @@ export default function TestPage() {
               </Grid>
             </Grid>
           </Grid>
-
           {/* creators start  */}
-
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid container>
               <Grid item xs={12}>
                 <Typography variant="h6">Creators</Typography>{" "}
               </Grid>
-
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/LaunchPad" passHref>
                   <Link
@@ -154,7 +148,6 @@ export default function TestPage() {
                   </Link>
                 </NextLink>
               </Grid>
-
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/verify-your-collection" passHref>
                   <Link
@@ -171,17 +164,19 @@ export default function TestPage() {
               </Grid>
             </Grid>
           </Grid>
-
           {/* About us start */}
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid item xs={12}>
               <NextLink href="/about-us">
-                <Link variant="h6" underline="none" sx={{ color: "text.primary" }}>
+                <Link
+                  variant="h6"
+                  underline="none"
+                  sx={{ color: "text.primary" }}
+                >
                   About us
                 </Link>
               </NextLink>
             </Grid>
-
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
               <NextLink href="/verify-your-collection" passHref>
                 <Link
@@ -196,7 +191,6 @@ export default function TestPage() {
                 </Link>
               </NextLink>
             </Grid>
-
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
               <NextLink href="/verify-your-collection" passHref>
                 <Link
@@ -211,7 +205,6 @@ export default function TestPage() {
                 </Link>
               </NextLink>
             </Grid>
-
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
               <NextLink href="/verify-your-collection" passHref>
                 <Link
@@ -228,12 +221,14 @@ export default function TestPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Box sx={{paddingX:"10%" , paddingTop:"5%"}}>
+        <Box sx={{ paddingX: "4.8%", paddingTop: "1%" }}>
           <hr />
-          <Typography align="center">Copy Right all rights reserved 2022</Typography>
+          <Typography align="center">
+            ©Copyright 2022. All rights reserved
+          </Typography>
         </Box>
       </Box>
-    </>
+    </div>
   );
 }
 TestPage.getLayout = function getLayout(page: JSX.Element) {
