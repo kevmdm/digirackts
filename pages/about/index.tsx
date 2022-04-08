@@ -3,20 +3,22 @@ import { Layout } from "../../components/layouts";
 import { Box, Typography, Link, IconButton, Grid } from "@mui/material";
 import NextLink from "next/link";
 
-export default function TestPage() {
+export default function AboutPage() {
   return (
-    <div>
+    <>
+      <Box sx={{ height: "200px" }}></Box>
       <Box
         sx={{
-          flexGrow: 1,
-          height: 540,
+          width: "flex",
+          height: 740,
           backgroundColor: "#F9F9F9",
         }}
       >
-        <Grid container sx={{paddingTop: "4%"}}>
+        <Grid container sx={{ ml: "4%", paddingTop: "4%" }}>
           {/* Logo row start  */}
-          <Grid item xs={6} >
-            <Grid container sx={{ml: "7%"}}>
+
+          <Grid item xs={6}>
+            <Grid container>
               <Grid item xs={12}>
                 <Link href={"/"}>
                   <IconButton
@@ -39,18 +41,20 @@ export default function TestPage() {
                   </IconButton>
                 </Link>
               </Grid>
+
               <Grid item xs={12}>
                 <Typography
-                  paddingRight={"25%"}
+                  paddingRight={"30%"}
                   paddingTop={"4%"}
                   paddingLeft={"2%"}
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Necessitatibus vitae earum provident iste enim quia officiis
-                  temporibus, quasi adipisci alias, dolorem ratione laboriosam rem
-                  maxime? Earum, veniam distinctio? Quibusdam, dolore?
+                  temporibus, quasi adipisci alias, dolorem ratione laboriosam
+                  rem maxime? Earum, veniam distinctio? Quibusdam, dolore?
                 </Typography>
               </Grid>
+
               <Box sx={{ gridRowStart: "auto" }}>
                 <NextLink href={"/"}>
                   <IconButton
@@ -63,7 +67,6 @@ export default function TestPage() {
                       "&:hover": {
                         backgroundColor: "transparent",
                       },
-                      paddingTop: "20%",
                     }}
                   >
                     <Image
@@ -84,7 +87,6 @@ export default function TestPage() {
                       "&:hover": {
                         backgroundColor: "transparent",
                       },
-                      paddingTop: "20%",
                     }}
                   >
                     <Image
@@ -97,21 +99,20 @@ export default function TestPage() {
               </Box>
             </Grid>
           </Grid>
-          {/* browse start  */}
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
+            {/* browse start  */}
+
             <Grid container>
               <Grid item xs={12}>
                 <Typography variant="h6">Browse</Typography>
               </Grid>
+
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/explore" passHref>
                   <Link
+                    variant="h6"
                     underline="none"
-                    sx={{
-                      fontWeight: "fontWeightLight",
-                      color: "text.primary",
-                      fontSize: "1.25rem",
-                    }}
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
                   >
                     Market Place
                   </Link>
@@ -119,35 +120,33 @@ export default function TestPage() {
               </Grid>
             </Grid>
           </Grid>
+
           {/* creators start  */}
+
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid container>
               <Grid item xs={12}>
                 <Typography variant="h6">Creators</Typography>{" "}
               </Grid>
+
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/LaunchPad" passHref>
                   <Link
+                    variant="h6"
                     underline="none"
-                    sx={{
-                      fontWeight: "fontWeightLight",
-                      color: "text.primary",
-                      fontSize: "1.25rem",
-                    }}
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
                   >
                     Launch Pad
                   </Link>
                 </NextLink>
               </Grid>
+
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/verify-your-collection" passHref>
                   <Link
+                    variant="h6"
                     underline="none"
-                    sx={{
-                      fontWeight: "fontWeightLight",
-                      color: "text.primary",
-                      fontSize: "1.25rem",
-                    }}
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
                   >
                     Verify Your Collection
                   </Link>
@@ -155,73 +154,18 @@ export default function TestPage() {
               </Grid>
             </Grid>
           </Grid>
-          {/* About us start */}
+
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
-            <Grid item xs={12}>
-              <NextLink href="/about-us">
-                <Link
-                  variant="h6"
-                  underline="none"
-                  sx={{ color: "text.primary" }}
-                >
-                  About us
-                </Link>
-              </NextLink>
-            </Grid>
-            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
-                <Link
-                  underline="none"
-                  sx={{
-                    fontWeight: "fontWeightLight",
-                    color: "text.primary",
-                    fontSize: "1.25rem",
-                  }}
-                >
-                  Our Team
-                </Link>
-              </NextLink>
-            </Grid>
-            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
-                <Link
-                  underline="none"
-                  sx={{
-                    fontWeight: "fontWeightLight",
-                    color: "text.primary",
-                    fontSize: "1.25rem",
-                  }}
-                >
-                  Terms And Conditions
-                </Link>
-              </NextLink>
-            </Grid>
-            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
-                <Link
-                  underline="none"
-                  sx={{
-                    fontWeight: "fontWeightLight",
-                    color: "text.primary",
-                    fontSize: "1.25rem",
-                  }}
-                >
-                  FAQ
-                </Link>
-              </NextLink>
-            </Grid>
+            {/* About us start */}
+            <NextLink href="/about-us">
+              <Link variant="h6">About us</Link>
+            </NextLink>
           </Grid>
         </Grid>
-        <Box sx={{ paddingX: "4.8%", paddingTop: "1%" }}>
-          <hr />
-          <Typography align="center">
-            ©Copyright 2022. All rights reserved
-          </Typography>
-        </Box>
       </Box>
-    </div>
+    </>
   );
 }
-TestPage.getLayout = function getLayout(page: JSX.Element) {
+AboutPage.getLayout = function getLayout(page: JSX.Element) {
   return <Layout>{page}</Layout>;
 };
