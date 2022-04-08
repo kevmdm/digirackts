@@ -18,7 +18,7 @@ export default function TestPage() {
       <Box sx={{ height: "200px" }}></Box>
       <Box
         sx={{
-          width: "flex",
+          flexGrow: 1,
           height: 740,
           backgroundColor: "#F9F9F9",
         }}
@@ -26,7 +26,7 @@ export default function TestPage() {
         <Grid container sx={{ ml: "4%", paddingTop: "4%" }}>
           {/* Logo row start  */}
 
-          <Grid item xs={6}>
+          <Grid item xs={5.5}>
             <Grid container>
               <Grid item xs={12}>
                 <Link href={"/"}>
@@ -53,7 +53,7 @@ export default function TestPage() {
 
               <Grid item xs={12}>
                 <Typography
-                  paddingRight={"30%"}
+                  paddingRight={"1%"}
                   paddingTop={"4%"}
                   paddingLeft={"2%"}
                 >
@@ -108,9 +108,8 @@ export default function TestPage() {
               </Box>
             </Grid>
           </Grid>
+          {/* browse start  */}
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
-            {/* browse start  */}
-
             <Grid container>
               <Grid item xs={12}>
                 <Typography variant="h6">Browse</Typography>
@@ -118,7 +117,14 @@ export default function TestPage() {
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/explore" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    underline="none"
+                    sx={{
+                      fontWeight: "fontWeightLight",
+                      color: "#131313",
+                      fontSize: "1.25rem",
+                    }}
+                  >
                     Market Place
                   </Link>
                 </NextLink>
@@ -130,14 +136,20 @@ export default function TestPage() {
 
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid container>
-              
               <Grid item xs={12}>
                 <Typography variant="h6">Creators</Typography>{" "}
               </Grid>
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/LaunchPad" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    underline="none"
+                    sx={{
+                      fontWeight: "fontWeightLight",
+                      color: "#131313",
+                      fontSize: "1.25rem",
+                    }}
+                  >
                     Launch Pad
                   </Link>
                 </NextLink>
@@ -145,23 +157,80 @@ export default function TestPage() {
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/verify-your-collection" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    underline="none"
+                    sx={{
+                      fontWeight: "fontWeightLight",
+                      color: "#131313",
+                      fontSize: "1.25rem",
+                    }}
+                  >
                     Verify Your Collection
                   </Link>
                 </NextLink>
               </Grid>
-
-
             </Grid>
           </Grid>
 
-          <Grid item xs={2}  sx={{ paddingTop: "30px" }}>
-            {/* About us start */}
-            <NextLink href="/about-us">
-              <Link variant="h6">About us</Link>
-            </NextLink>
+          {/* About us start */}
+          <Grid item xs={2} sx={{ paddingTop: "30px" }}>
+            <Grid item xs={12}>
+              <NextLink href="/about-us">
+                <Link variant="h6" underline="none" sx={{ color: "#131313" }}>
+                  About us
+                </Link>
+              </NextLink>
+            </Grid>
+
+            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
+              <NextLink href="/verify-your-collection" passHref>
+                <Link
+                  underline="none"
+                  sx={{
+                    fontWeight: "fontWeightLight",
+                    color: "#131313",
+                    fontSize: "1.25rem",
+                  }}
+                >
+                  Our Team
+                </Link>
+              </NextLink>
+            </Grid>
+
+            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
+              <NextLink href="/verify-your-collection" passHref>
+                <Link
+                  underline="none"
+                  sx={{
+                    fontWeight: "fontWeightLight",
+                    color: "#131313",
+                    fontSize: "1.25rem",
+                  }}
+                >
+                  Terms And Conditions
+                </Link>
+              </NextLink>
+            </Grid>
+
+            <Grid item xs={12} sx={{ paddingTop: "10%" }}>
+              <NextLink href="/verify-your-collection" passHref>
+                <Link
+                  underline="none"
+                  sx={{
+                    fontWeight: "fontWeightLight",
+                    color: "#131313",
+                    fontSize: "1.25rem",
+                  }}
+                >
+                  FAQ
+                </Link>
+              </NextLink>
+            </Grid>
           </Grid>
         </Grid>
+        <Box sx={{width:2080}}>
+          <hr />
+        </Box>
       </Box>
     </>
   );
