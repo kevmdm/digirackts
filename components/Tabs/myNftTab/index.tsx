@@ -9,6 +9,9 @@ import { connect } from "react-redux";
 import { loadAssets } from "../../../store/wallet/api";
 import { FC, useEffect } from "react";
 import StateWallet from "../../../interfaces/stateWallet";
+import SearchNFT from "../../SearchBoxes/SearchNFT";
+import { Grid } from "@mui/material";
+import MenuButton from "../../MenuButton";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -172,7 +175,22 @@ const MyNftTab: FC<MyNftTabParams> = ({ state_wallet, loadAssets }) => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Box sx={{ paddingX: "50px" }}>mynft </Box>
+        <Box sx={{ paddingX: "10px" }}>
+          <Grid container>
+            <Grid item xs={12} sm={6} md={5}>
+              <SearchNFT
+                placeholder="Search NFTs"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
+              ></SearchNFT>
+            </Grid>
+            <Grid item xs={3}>
+              <MenuButton></MenuButton>
+
+            </Grid>
+          </Grid>
+        </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box sx={{ paddingX: "50px" }}>activity</Box>
