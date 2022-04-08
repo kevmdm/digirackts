@@ -10,7 +10,7 @@ export const Footer = () => {
       <Box
         sx={{
           flexGrow: 1,
-          height: 540,
+          height: 640,
           backgroundColor: "#F9F9F9",
         }}
       >
@@ -213,7 +213,7 @@ export const Footer = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Box sx={{ paddingX: "4.8%", paddingTop: "1%" }}>
+        <Box sx={{ paddingX: "4.8%", paddingTop: "2%" }}>
           <hr />
           <Typography align="center">
             ©Copyright 2022. All rights reserved
