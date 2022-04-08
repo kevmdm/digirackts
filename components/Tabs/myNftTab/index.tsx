@@ -12,6 +12,7 @@ import StateWallet from "../../../interfaces/stateWallet";
 import SearchNFT from "../../SearchBoxes/SearchNFT";
 import { Grid } from "@mui/material";
 import MenuButton from "../../MenuButton";
+import { MyAssetCard } from "../../MyAssetCard";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -187,7 +188,15 @@ const MyNftTab: FC<MyNftTabParams> = ({ state_wallet, loadAssets }) => {
             </Grid>
             <Grid item xs={3}>
               <MenuButton></MenuButton>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={12} sm={6} md={3}>
+                  <MyAssetCard asset={'hola'}>
 
+                  </MyAssetCard>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Box>

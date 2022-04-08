@@ -3,7 +3,7 @@ import { Layout } from "../../components/layouts";
 import { Box, Typography, Link, IconButton, Grid } from "@mui/material";
 import NextLink from "next/link";
 
-export default function TestPage() {
+export default function AboutPage() {
   return (
     <>
       <Box sx={{ height: "200px" }}></Box>
@@ -109,7 +109,11 @@ export default function TestPage() {
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/explore" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    variant="h6"
+                    underline="none"
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
+                  >
                     Market Place
                   </Link>
                 </NextLink>
@@ -121,14 +125,17 @@ export default function TestPage() {
 
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid container>
-              
               <Grid item xs={12}>
                 <Typography variant="h6">Creators</Typography>{" "}
               </Grid>
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/LaunchPad" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    variant="h6"
+                    underline="none"
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
+                  >
                     Launch Pad
                   </Link>
                 </NextLink>
@@ -136,17 +143,19 @@ export default function TestPage() {
 
               <Grid item xs={12} sx={{ paddingTop: "10%" }}>
                 <NextLink href="/verify-your-collection" passHref>
-                  <Link variant="h6" underline="none" sx={{fontWeight:"fontWeightLight", color:"#131313"}}>
+                  <Link
+                    variant="h6"
+                    underline="none"
+                    sx={{ fontWeight: "fontWeightLight", color: "#131313" }}
+                  >
                     Verify Your Collection
                   </Link>
                 </NextLink>
               </Grid>
-
-
             </Grid>
           </Grid>
 
-          <Grid item xs={2}  sx={{ paddingTop: "30px" }}>
+          <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             {/* About us start */}
             <NextLink href="/about-us">
               <Link variant="h6">About us</Link>
@@ -157,6 +166,6 @@ export default function TestPage() {
     </>
   );
 }
-TestPage.getLayout = function getLayout(page: JSX.Element) {
+AboutPage.getLayout = function getLayout(page: JSX.Element) {
   return <Layout>{page}</Layout>;
 };

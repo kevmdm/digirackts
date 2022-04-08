@@ -1,10 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Dapp from "../../cardano/TestingApp";
 import { Layout } from "../../components/layouts";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import MyNftTab from "../../components/Tabs/myNftTab";
 
 export default function MyNftPage() {
@@ -23,7 +19,7 @@ export default function MyNftPage() {
         <Grid item sm={12} sx={{ height: 20 }}></Grid>
         <Grid item sm={12}></Grid>
       </Grid>
-      <MyNftTab></MyNftTab>
+      <MyNftTab />
     </>
   );
 }
