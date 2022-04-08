@@ -157,18 +157,18 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
         <Toolbar>
           <Link href={"/"}>
             <IconButton
-              sx={{ ml: "50px" }}
+              sx={{
+                ml: "50px",
+                "&:hover": {
+                  backgroundColor: "transparent",
+                },
+              }}
               size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
-              sx={{
-                "&:hover": {
-                  backgroundColor: "transparent",
-                },
-              }}
             >
               <Image
                 src={"/img/navbar/textLogo.png"}
