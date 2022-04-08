@@ -155,16 +155,20 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position={position} sx={shadow}>
         <Toolbar>
-          
-          <Link href={"/"} >
+          <Link href={"/"}>
             <IconButton
-              sx={{ml:'50px'}}
+              sx={{ ml: "50px" }}
               size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
+              sx={{
+                "&:hover": {
+                  backgroundColor: "transparent",
+                },
+              }}
             >
               <Image
                 src={"/img/navbar/textLogo.png"}
@@ -194,10 +198,14 @@ const PrimarySearchAppBar: FC<{ type: string }> = ({ type }) => {
               </Typography>
             </Box>
             <Box sx={{ padding: "35px 25px 22px 0px" }}>
-              <Typography color="text.primary" fontSize={22}>Resources</Typography>
+              <Typography color="text.primary" fontSize={22}>
+                Resources
+              </Typography>
             </Box>
             <Box sx={{ padding: "35px 25px 22px 0px" }}>
-              <Typography color="text.primary" fontSize={22}>Create</Typography>
+              <Typography color="text.primary" fontSize={22}>
+                Create
+              </Typography>
             </Box>
             <ButtonDarkMode></ButtonDarkMode>
             <ButtonWallet></ButtonWallet>
