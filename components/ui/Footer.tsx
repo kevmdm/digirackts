@@ -184,7 +184,7 @@ export const Footer = () => {
               </NextLink>
             </Grid>
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
+              <NextLink href="/terms-and-conditions" passHref>
                 <Link
                   underline="none"
                   sx={{
@@ -193,7 +193,7 @@ export const Footer = () => {
                     fontSize: "1.25rem",
                   }}
                 >
-                  Terms And Conditions
+                  Terms & Conditions
                 </Link>
               </NextLink>
             </Grid>
