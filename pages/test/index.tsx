@@ -121,7 +121,7 @@ export default function TestPage() {
                     underline="none"
                     sx={{
                       fontWeight: "fontWeightLight",
-                      color: "#131313",
+                      color: "text.primary",
                       fontSize: "1.25rem",
                     }}
                   >
@@ -146,7 +146,7 @@ export default function TestPage() {
                     underline="none"
                     sx={{
                       fontWeight: "fontWeightLight",
-                      color: "#131313",
+                      color: "text.primary",
                       fontSize: "1.25rem",
                     }}
                   >
@@ -161,7 +161,7 @@ export default function TestPage() {
                     underline="none"
                     sx={{
                       fontWeight: "fontWeightLight",
-                      color: "#131313",
+                      color: "text.primary",
                       fontSize: "1.25rem",
                     }}
                   >
@@ -176,7 +176,7 @@ export default function TestPage() {
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid item xs={12}>
               <NextLink href="/about-us">
-                <Link variant="h6" underline="none" sx={{ color: "#131313" }}>
+                <Link variant="h6" underline="none" sx={{ color: "text.primary" }}>
                   About us
                 </Link>
               </NextLink>
@@ -188,7 +188,7 @@ export default function TestPage() {
                   underline="none"
                   sx={{
                     fontWeight: "fontWeightLight",
-                    color: "#131313",
+                    color: "text.primary",
                     fontSize: "1.25rem",
                   }}
                 >
@@ -203,7 +203,7 @@ export default function TestPage() {
                   underline="none"
                   sx={{
                     fontWeight: "fontWeightLight",
-                    color: "#131313",
+                    color: "text.primary",
                     fontSize: "1.25rem",
                   }}
                 >
@@ -218,7 +218,7 @@ export default function TestPage() {
                   underline="none"
                   sx={{
                     fontWeight: "fontWeightLight",
-                    color: "#131313",
+                    color: "text.primary",
                     fontSize: "1.25rem",
                   }}
                 >
@@ -228,8 +228,9 @@ export default function TestPage() {
             </Grid>
           </Grid>
         </Grid>
-        <Box sx={{width:2080}}>
+        <Box sx={{paddingX:"10%" , paddingTop:"5%"}}>
           <hr />
+          <Typography align="center">Copy Right all rights reserved 2022</Typography>
         </Box>
       </Box>
     </>
