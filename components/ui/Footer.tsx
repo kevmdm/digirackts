@@ -159,7 +159,7 @@ export const Footer = () => {
           {/* About us start */}
           <Grid item xs={2} sx={{ paddingTop: "30px" }}>
             <Grid item xs={12}>
-              <NextLink href="/about-us">
+              <NextLink href="/about" passHref>
                 <Link
                   variant="h6"
                   underline="none"
@@ -170,7 +170,7 @@ export const Footer = () => {
               </NextLink>
             </Grid>
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
+              <NextLink href="/our-team" passHref>
                 <Link
                   underline="none"
                   sx={{
@@ -198,7 +198,7 @@ export const Footer = () => {
               </NextLink>
             </Grid>
             <Grid item xs={12} sx={{ paddingTop: "10%" }}>
-              <NextLink href="/verify-your-collection" passHref>
+              <NextLink href="/faq" passHref>
                 <Link
                   underline="none"
                   sx={{

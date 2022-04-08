@@ -3,7 +3,7 @@ import { Layout } from "../../components/layouts";
 import { Box, Typography, Link, IconButton, Grid } from "@mui/material";
 import NextLink from "next/link";
 
-export default function AboutPage() {
+export default function VerifyPage() {
   return (
     <div>
       <Typography align="center">Here start the about</Typography>
@@ -54,6 +54,6 @@ export default function AboutPage() {
     </div>
   );
 }
-AboutPage.getLayout = function getLayout(page: JSX.Element) {
+VerifyPage.getLayout = function getLayout(page: JSX.Element) {
   return <Layout>{page}</Layout>;
 };
